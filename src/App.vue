@@ -3,10 +3,13 @@ import Navbar from "./components/Navbar.vue";
 import MainComp from "./components/MainComp.vue";
 import About from "./components/About.vue";
 import { ref, onMounted } from "vue";
-import { useStore } from "vuex";
-
+// import { useStore } from "vuex";
+import { useStore } from "./store/store";
+import { storeToRefs } from "pinia";
 // 날씨 데이터 상태변수
+
 const store = useStore();
+const { toggle } = storeToRefs(store);
 // const weatherData = ref({
 //     icon: "icon",
 //     temp: 0,
@@ -35,23 +38,24 @@ const store = useStore();
 // };
 
 onMounted(() => {
-    console.log("onMounted");
+    // console.log("onMounted");
     // getWeather();
-    store.dispatch("getWeather");
+    // store.dispatch("getWeather");
+    store.getWeather;
 });
 
-const onSearchCity = (city) => {
-    console.log("city : app ", city);
-    weatherData.value.city = city;
-    getWeather();
-};
+// const onSearchCity = (city) => {
+//     console.log("city : app ", city);
+//     weatherData.value.city = city;
+//     getWeather();
+// };
 </script>
 
 <template>
     <!-- <button @click="$store.dispatch('getWeather')">getWeather</button> -->
     <h1>APP</h1>
     <Navbar />
-    <div v-if="!$store.state.toggle">
+    <div v-if="!toggle">
         <MainComp />
     </div>
     <div v-else>

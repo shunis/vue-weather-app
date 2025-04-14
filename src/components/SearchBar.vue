@@ -9,8 +9,10 @@
                 />
                 <button
                     @click="
-                        $store.commit('onSearchCity', inputText);
-                        $store.dispatch('getWeather');
+                        // $store.commit('onSearchCity', inputText);
+                        // $store.dispatch('getWeather');
+                        store.onSearchCity(inputText);
+                        store.getWeather();
                     "
                 >
                     <font-awesome-icon class="icon" :icon="['fas', 'magnifying-glass']" />
@@ -20,10 +22,14 @@
     </div>
 </template>
 <script setup>
-import { ref } from "vue";
+// import { ref } from "vue";
+// const inputText = ref("");
+// const emits = defineEmits(["onSearchCity"]);
 
-const inputText = ref("");
-const emits = defineEmits(["onSearchCity"]);
+import { useStore } from "../store/store";
+import { storeToRefs } from "pinia";
+const store = useStore();
+const { weatherData } = storeToRefs(store);
 </script>
 
 <style lang="scss" scoped>
